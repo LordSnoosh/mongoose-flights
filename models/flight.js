@@ -7,6 +7,8 @@ const flightSchema = new Schema({
   flightNo: Number,
   airport: String,
   departs: Date
+}, {
+    timestamps: true,
 });
 
 module.exports = mongoose.model('Flight', flightSchema);
