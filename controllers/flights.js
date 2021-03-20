@@ -7,39 +7,44 @@ module.exports = {
   update,
   delete: deleteFlight
 };
+
 function index(req, res) {
   Flight.find({}, function(err, flights) {
       if (err) console.log(err);
       res.send(flights);
   });
-}
+};
+
 function show(req, res) {
   Flight.findById(req.params.id, function(err, flights) {
       if (err) console.log(err);
-      res.send(flight);
+      res.send(flights);
   });
-}
+};
+
 function create(req, res) {
   Flight.create(req.body, function(err, flight) {
       if (err) console.log(err);
       res.redirect('/flights/$flight._id}');
   })
-}
+};
+
 function update(req, res) {
   Flight.findById(req.params.id, function(err, flights) {
       if (err) console.log(err);
       const updatedFlight = Object.assign(flight, req.body);
       Flight.findByIdAndUpdate(req.params.id, updatedFlight, function(err, flght) {
-          res.redirect('/flight/${req.params.id}');
+          res.redirect('/flights/${req.params.id}');
       });
   });
-}
+};
+
 function deleteFlight(req, res) {
   Flight.findByIdAndDelete(req.params.id, function(err, deletedFlight) {
       if (err) console.log(err);
       res.redirect('/flights');
   })
-}
+};
 
 // module.exports = {
 //     index,
