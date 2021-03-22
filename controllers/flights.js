@@ -18,24 +18,25 @@ function index(req, res) {
   });
 };
 
-function newFlight(req, res) {
+function newFlight(req, res){
   const newFlight = new Flight();
-const dt = newFlight.departs;
-// const departsDate = dt.toLocaleString();
-res.render('flights/new', {dt});
+  const dt = newFlight.departs;
+  console.log(dt)
+let departsDate = `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}`;
+departsDate += `-${dt.getDate().toString().padStart(2, '0')}T${dt.toTimeString().slice(0, 5)}`;
+res.render('flights/new', {departsDate});
 }
 
 function create(req, res) {
-  const flight = new Flight(req.body);
-  flight.save(function(err) {
-    if (err) return res.render('flights/new');
-    console.log(flight);
-    res.redirect('/flights');
-  });
+  if (req.body.departs === '') delete req.body.departs
+  console.log(req.body);
+  Flight.create(req.body, function (err, flight) {
+    if (err) console.log(err);
+    res.redirect(`/flights`);
+  })
+};
   
-  // let departsDate = `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}`;
-  //   departsDate += `-${dt.getDate().toString().padStart(2, '0')}T${dt.toTimeString().slice(0, 5)}`;
-}
+
 
 function deleteFlight(req, res) {
   Flight.findByIdAndDelete(req.params.id, function(err, deletedFlight) {
