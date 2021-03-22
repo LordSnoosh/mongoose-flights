@@ -1,8 +1,7 @@
 <%- include('../partials/header') %>
-
 <section id="show-page">
   <div>Airline: </div>
-  <div><%= flight.airport %></div>
+  <div><%= flight.airline %></div>
   <div>Flight Number: </div>
   <div><%= flight.flightNo %></div>
   <div>Departure: </div>
@@ -10,9 +9,59 @@
   <div>Airport: </div>
   <div><%= flight.airport %></div>
 </section>
-
-<!-- new markup below -->
 <br><br><h2>Destination</h2>
+<form id="add-destination-form" method="POST"
+  action="/flights/<%= flight._id %>/destinations">
+  <label>Arrival Date:</label>
+  <input type="datetime-local" name="destinationDate">
+  <label>Airport:</label>
+  <select name="airport">
+    <option value="AUS">AUS</option>
+    <option value="DFW">DFW</option>
+    <option value="DEN" selected>DEN</option>
+    <option value="LAX">LAX</option>
+    <option value="SAN">SAN</option>
+</select>
+  <input type="submit" value="Add Destination">
+</form>
+<% if (flight.destinations.length) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Airport</th>
+        <th>Arrival</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flight.destinations.forEach(function(f) { %>
+        <tr>
+          <td><%= f.createdAt.toLocaleDateString() %></td>
+          <td><%= f.destinationDate %></td>
+          <td><%= f.airport %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <h5>No Destinations Yet</h5>
+<% } %>
+<%- include('../partials/footer') %>
+
+<!-- <%- include('../partials/header') %>
+
+<section id="show-page">
+  <div>Airline: </div>
+  <div><%= flight.airline %></div>
+  <div>Flight Number: </div>
+  <div><%= flight.flightNo %></div>
+  <div>Departure: </div>
+  <div><%= flight.departs %></div>
+  <div>Airport: </div>
+  <div><%= flight.airport %></div>
+</section>
+new markup below -->
+<!-- <br><br><h2>Destination</h2>
 <form id="add-destination-form" method="POST"
   action="/flights/<%= flight._id %>/destinations">
   <label>Arrival Date:</label>
@@ -38,10 +87,10 @@
       </tr>
     </thead>
     <tbody>
-      <% flight.destinations.forEach(function(d) { %>
+      <% flight.destinations.forEach(function(f) { %>
         <tr>
-          <td><%= d.destinationDate %></td>
-          <td><%= d.airport %></td>
+          <td><%= f.destinationDate %></td>
+          <td><%= f.airport %></td>
         </tr>
       <% }); %>
     </tbody>
@@ -50,4 +99,4 @@
   <h5>No Destinations Yet</h5>
 <% } %>
   
-<%- include('../partials/footer') %>
+<%- include('../partials/footer') %> --> -->
