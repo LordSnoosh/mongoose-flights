@@ -21,8 +21,8 @@ function index(req, res) {
 function newFlight(req, res) {
   const newFlight = new Flight();
 const dt = newFlight.departs;
-const departsDate = dt.toLocaleString();
-res.render('flights/new', {departsDate});
+// const departsDate = dt.toLocaleString();
+res.render('flights/new', {dt});
 }
 
 function create(req, res) {
@@ -32,6 +32,9 @@ function create(req, res) {
     console.log(flight);
     res.redirect('/flights');
   });
+  
+  // let departsDate = `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}`;
+  //   departsDate += `-${dt.getDate().toString().padStart(2, '0')}T${dt.toTimeString().slice(0, 5)}`;
 }
 
 function deleteFlight(req, res) {
