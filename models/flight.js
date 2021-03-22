@@ -14,11 +14,15 @@ const flightSchema = new Schema({
     enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'],
     default: 'DEN'
   },
-  departs: {type: String, default: function() {
-    return new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-  }}
-}, {
-  timestamps: true
+  departs: {
+    type: Date,
+    default: function() {
+        const current = new Date();
+        const date = current.setFullYear(current.getFullYear() + 1);
+        return date
+    }
+}
 });
+
 
 module.exports = mongoose.model('Flight', flightSchema);
