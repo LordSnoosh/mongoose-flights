@@ -5,6 +5,7 @@ module.exports = {
   create,
   index,
   delete: deleteFlight,
+  show,
 };
 
 function index(req, res) {
@@ -13,6 +14,11 @@ function index(req, res) {
     res.render("flights/index", { flights });
   });
 }
+function show(req, res) {
+Flight.findById(req.params.id, function(err, flight) {
+  res.render('flights/show', {title: 'Flight Detail', flight });
+})
+};
 
 function newFlight(req, res) {
   const newFlight = new Flight();
