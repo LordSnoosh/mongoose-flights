@@ -10,4 +10,4 @@ function create(req, res) {
             res.redirect(`/flights/${flight._id}`);
         });
     });
-}
+};
