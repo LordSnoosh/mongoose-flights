@@ -22,14 +22,17 @@
       </thead>
       <tbody>
         <% flights.forEach(function(f) { %>
-        <tr>
-          <td><%= f.airline %></td>
-          <td><%= f.flightNo %></td>
-          <td><%= f.airport %></td>
-          <td><%= f.departs %></td>
-          <td><a href="/flights/<%= f._id %>">DETAILS</a></td>
-        </tr>
-        <% }); %>
+          <tr>
+              <form action="/flights/<%= f._id %>?_method=DELETE" method="POST">
+                  <td ><button type="submit">X</button></td>
+                  <td ><%= f.property %></td>
+                  <td ><%= f.flightNo %></td>
+                  <td ><%= f.airport %></td>
+                  <td ><%= f.departs %></td>
+                  <td ><a href="/flights/<%= f._id %>">Details</a></td>
+              </form>
+          </tr>
+          <% }); %>
       </tbody>
     </table>
   </body>

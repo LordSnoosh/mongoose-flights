@@ -45,8 +45,9 @@ function create(req, res) {
 }
 
 function deleteFlight(req, res) {
-  Flight.findByIdAndDelete(req.params.id, function (err, deletedFlight) {
-    if (err) console.log(err);
-    res.redirect("/flights");
-  });
+  Flight.findByIdAndDelete(req.params.id, function(err, deletedFlight) {
+      if (err) console.log(err)
+  })
+  res.redirect('/flights');
 }
+
