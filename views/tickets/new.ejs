@@ -1,5 +1,22 @@
 <%- include('../partials/header') %>
 
+<br><br><h2>Tickets</h2>
+<form id="add-ticket-form" method="POST"
+  action="/flights/<%= flight._id %>/tickets">
+  <label>Seat:</label>
+  <select name="seat" id="seat-dropdown">
+    <option value="A-19">A-19</option>
+  </select>
+  <label>Price:</label>
+  <input type="text" name="price" id="price-entry">
+  <input type="submit" value="Add Ticket">
+</form>
+
+<%- include('../partials/footer') %>
+
+
+<!-- <%- include('../partials/header') %>
+
 <p>Please first ensure that the seat is not in the dropdown
   <select>
     <% tickets.forEach(function(f) { %>
@@ -15,4 +32,4 @@
   <input type="submit" value="Add Ticket">
 </form>
 
-<%- include('../partials/footer') %>
+<%- include('../partials/footer') %> -->
