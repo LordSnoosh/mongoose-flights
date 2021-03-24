@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
 <section id="show-page">
   <div>Airline: </div>
   <div><%= flight.airline %></div>
@@ -10,11 +9,11 @@
   <div>Airport: </div>
   <div><%= flight.airport %></div>
 </section>
-
-  <section>
-<div>Tickets:</div>
+<div>Tickets:</div><br><a href="/flights/<%=flight._id%>/tickets/new">Add Ticket</a>
 <ul>
-  <a href="/flights/<%= flight._id %>/tickets">Add Tickets</a>
+  <% tickets.forEach(function (t) { %>
+    <li><%=t.seat%> <small><%=t.price%></small></li>
+   <% }); %>
 </ul>
 <br><br><h2>Destination</h2>
 <form id="add-destination-form" method="POST"
@@ -31,20 +30,18 @@
 </select>
   <input type="submit" value="Add Destination">
 </form>
-</section>
+
 <% if (flight.destinations.length) { %>
   <table>
     <thead>
       <tr>
         <th>Arrival Date</th>
         <th>Airport</th>
-        
       </tr>
     </thead>
     <tbody>
       <% flight.destinations.forEach(function(f) { %>
         <tr>
-        
           <td><%= f.arrival %></td>
           <td><%= f.airport %></td>
         </tr>

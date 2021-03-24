@@ -1,56 +1,43 @@
 const Ticket = require('../models/ticket');
 const Flight = require('../models/flight');
+
 module.exports = {
-    addToFlight,
-    show,
     create,
     update,
     delete: deleteTicket,
+    new: newTicket
 };
 
-function addToFlight(req, res) {
-    Flight.findById(req.params.id, function(err, flight) {
-      flight.ticket.push(req.body.ticketId);
-      flight.save(function(err) {
-        res.redirect(`/flights/${flight._id}`);
-      });
-    });
-  };
-function show(req, res) {
-Ticket.findById(req.params.id, function(err, ticket) {
-    res.render('/tickets/new', {title: 'Ticket Detail', flight, ticket });
-    
-    })
-};
 
-// function create(req, res) {
-// Flight.findById(req.params.id, function(err, flight) {
-//     flight.ticket.push(req.body);
-//     flight.save(function(err) {
-//     res.redirect(`/flights/${flight._id}`);
-//     });
-// });
-// };
 function create(req, res) {
+    // add the pupster to the body, as the body will not have it
+    // but you bet your bottom you need it
     req.body.flight = req.params.id;
-    Ticket.create(req.body, function(err, ticket) {
-        res.redirect(`/tickets/${req.params.id}`);
-    }); 
-};
+    Ticket.create(req.body, function(err, toy) {
+        res.redirect(`/flights/${req.params.id}`);
+    })
+}
 
 function update(req, res) {
-    Ticket.findById(req.params.id, function(err, ticket){
+    Ticket.findById(req.params.id, function(err, toy) {
         Object.assign(ticket, req.body);
         ticket.save(function(err) {
-            // res.render()
-            //or?
-            res.redirect(`/tickets/${ticket.flight}`);
-        });
-    });
-};
+            res.redirect(`/flights/${ticket.flight}`);
+        })
+    })
+}
 
 function deleteTicket(req, res) {
     Ticket.findByIdAndDelete(req.params.id, function(err, deletedTicket) {
-        res.redirect(`/tickets/${deletedTicket.flight}`);
-    });
-};
+        res.redirect(`/flights/${deletedTicket.flights}`);
+    })
+}
+
+function newTicket(req, res) {
+    Ticket.find({}, function (err, tickets) {
+      res.render('tickets/new', {
+        title: 'Add Ticket',
+        flightId: req.params.id
+      });
+    })
+  }
