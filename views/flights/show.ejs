@@ -1,4 +1,5 @@
 <%- include('../partials/header') %>
+
 <section id="show-page">
   <div>Airline: </div>
   <div><%= flight.airline %></div>
@@ -10,10 +11,12 @@
   <div><%= flight.airport %></div>
 <div>Tickets:</div>
 <ul>
-  <!-- <%- flight.tickets.map(t =>
+  <%- flight.ticket.map(t =>
   `<li>${t.seat} <small>${t.price}</small></li>`
-  ).join('') %> -->
+  ).join('') %>
+  <a href="/tickets/new">Add Tickets</a>
 </ul>
+
 </section>
 
 <br><br><h2>Destination</h2>

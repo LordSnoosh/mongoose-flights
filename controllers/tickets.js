@@ -30,14 +30,3 @@ function deleteTicket(req, res) {
         res.redirect(`/flights/${deletedTicket.flight}`);
     });
 };
-
-
-
-// function addToFlight(req, res) {
-//     Flight.findById(req.params.id, function(err, flight) {
-//         flight.ticket.push(req.body.ticketId);
-//         flight.save(function(err) {
-//             res.redirect(`/flights/${flight._id}`);
-//         });
-//     });
-// }
