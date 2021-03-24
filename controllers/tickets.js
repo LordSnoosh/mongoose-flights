@@ -15,28 +15,28 @@ function addToFlight(req, res) {
         res.redirect(`/flights/${flight._id}`);
       });
     });
-  }
+  };
 function show(req, res) {
-    Ticket.findById(req.params.id, function(err, ticket) {
-      res.render('/tickets/show', {title: 'Ticket Detail', ticket });
-      
+Ticket.findById(req.params.id, function(err, ticket) {
+    res.render('/tickets/new', {title: 'Ticket Detail', flight, ticket });
+    
     })
-    };
-
-function create(req, res) {
-Flight.findById(req.params.id, function(err, flight) {
-    flight.ticket.push(req.body);
-    flight.save(function(err) {
-    res.redirect(`/flights/${flight._id}`);
-    });
-});
 };
+
 // function create(req, res) {
-//     req.body.flight = req.params.id;
-//     Ticket.create(req.body, function(err, ticket) {
-//         res.redirect(`/tickets/${req.params.id}`);
-//     }); 
+// Flight.findById(req.params.id, function(err, flight) {
+//     flight.ticket.push(req.body);
+//     flight.save(function(err) {
+//     res.redirect(`/flights/${flight._id}`);
+//     });
+// });
 // };
+function create(req, res) {
+    req.body.flight = req.params.id;
+    Ticket.create(req.body, function(err, ticket) {
+        res.redirect(`/tickets/${req.params.id}`);
+    }); 
+};
 
 function update(req, res) {
     Ticket.findById(req.params.id, function(err, ticket){
@@ -51,6 +51,6 @@ function update(req, res) {
 
 function deleteTicket(req, res) {
     Ticket.findByIdAndDelete(req.params.id, function(err, deletedTicket) {
-        res.redirect(`/flights/${deletedTicket.flight}`);
+        res.redirect(`/tickets/${deletedTicket.flight}`);
     });
 };
