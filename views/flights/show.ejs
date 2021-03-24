@@ -8,7 +8,14 @@
   <div><%= flight.departs %></div>
   <div>Airport: </div>
   <div><%= flight.airport %></div>
+<div>Tickets:</div>
+<ul>
+  <!-- <%- flight.tickets.map(t =>
+  `<li>${t.seat} <small>${t.price}</small></li>`
+  ).join('') %> -->
+</ul>
 </section>
+
 <br><br><h2>Destination</h2>
 <form id="add-destination-form" method="POST"
   action="/flights/<%= flight._id %>/destinations">
